@@ -4,6 +4,12 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 
+
+//import for doc
+
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+
 // importing routes
 import statusRoutes from "./routes/StaatusRoutes";
 import blogRoutes from "./routes/blogRoutes"
@@ -12,6 +18,41 @@ import userRoutes from "./routes/userRoute";
 
 const app = express();
 dotenv.config();
+
+//fo documentation
+ 
+const options = {
+  definition: {
+    openapi : "3.0.0",
+    info :{
+      title: "My Documention",
+      version : "1.0.0.",
+    },
+    servers: [{
+       url:"http://localhost:4200/"
+    
+    }
+  ],
+  security: [
+    {
+      BearerAuth: [],
+    },
+  ],
+  components: {
+    securitySchemes: {
+      BearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  }
+  },
+  apis: ['./src/Docs/*.js']
+}
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/Docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -32,5 +73,6 @@ app.get("/", (req, res) => {
     message: "Welcome to My Api",
   });
 });
+
 
 export default app;
