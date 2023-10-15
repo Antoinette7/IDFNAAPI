@@ -1,7 +1,7 @@
 // Get all Users
 /**
  * @swagger
- * /api/user/selectUsers:
+ * /api/user/read:
  *   get:
  *     tags:
  *       - Get All Users
@@ -20,7 +20,7 @@
 // Get all blogs
 /**
  * @swagger
- * /api/blog/select:
+ * /api/blog/read:
  *   get:
  *     tags:
  *       - Get All Blogs
@@ -39,7 +39,7 @@
 // Insert blogs
 /**
  * @swagger
- * /api/blog/create:
+ * /api/blog/postg:
  *   post:
  *     tags:
  *       - Insert New Blog
