@@ -39,7 +39,7 @@
 // Insert blogs
 /**
  * @swagger
- * /api/blog/postg:
+ * /api/blog/post:
  *   post:
  *     tags:
  *       - Insert New Blog
