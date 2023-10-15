@@ -1,84 +1,125 @@
-// Get all Users
 /**
  * @swagger
- * /api/user/read:
- *   get:
- *     tags:
- *       - Get All Users
- *     description: Returns all Users
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: An array of posts
- *         schema:
- *           type: array
- *       500:
- *         description: Internal server error
- */
-
-// Get all blogs
-/**
- * @swagger
- * /api/blog/read:
- *   get:
- *     tags:
- *       - Get All Blogs
- *     description: Returns all Blogs
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: An array of posts
- *         schema:
- *           type: array
- *       500:
- *         description: Internal server error
- */
-
-// Insert blogs
-/**
- * @swagger
- * /api/blog/post:
+ * /api/klab/user/signup:
  *   post:
+ *     summary: Create a new user with image upload.
  *     tags:
- *       - Insert New Blog
- *     description: adding new blog successfully
- *     produces:
- *       - application/json
+ *       - Users
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstname:
+ *                 type: string
+ *                 description: First name of the user.
+ *               lastname:
+ *                 type: string
+ *                 description: Last name of the user.
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Email address of the user.
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: User's password.
+ *               profile:
+ *                 type: string
+ *                 format: binary
+ *                 description: User's profile picture.
  *     responses:
- *       200:
- *         description: An array of posts
- *         schema:
- *           type: array
- *       500:
- *         description: Internal server error
+ *       '201':
+ *         description: User created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Status message (e.g., '201').
+ *                 message:
+ *                   type: string
+ *                   description: A message indicating success.
+ *                 data:
+ *                   type: object
+ *                   description: The user data.
+ *       '500':
+ *         description: Failed to create user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Status message (e.g., '500').
+ *                 message:
+ *                   type: string
+ *                   description: A message indicating failure.
+ *                 error:
+ *                   type: string
+ *                   description: A description of the error.
  */
 
-// Delete blog by Id
+
+
 /**
  * @swagger
- * /api/blog/delete/{Id}:
- *   delete:
+ * /api/klab/user/login:
+ *   post:
+ *     summary: Log in a user with email and password.
  *     tags:
- *       - Delete Blog
- *     description: Delete a blog by ID
- *     parameters:
- *       - name: blogId
- *         in: path
- *         description: ID of the blog to delete
- *         required: true
- *         schema:
- *           type: string
- *     produces:
- *       - application/json
+ *       - Users
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Email address of the user.
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: User's password.
  *     responses:
- *       200:
- *         description: Blog deleted successfully
- *       404:
- *         description: Blog not found
- *       500:
- *         description: Internal server error
+ *       '200':
+ *         description: User logged in successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Status message (e.g., '200').
+ *                 message:
+ *                   type: string
+ *                   description: A message indicating success.
+ *                 users:
+ *                   type: object
+ *                   description: User data.
+ *                 token:
+ *                   type: string
+ *                   description: Authentication token.
+ *       '404':
+ *         description: User not found or incorrect password.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Status message (e.g., '404').
+ *                 message:
+ *                   type: string
+ *                   description: A message indicating failure.
  */
 
 
