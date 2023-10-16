@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema({
     default: "admin",
   },
 });
+//git any change
 
 const users = mongoose.model("users", userSchema);
 export default users;
