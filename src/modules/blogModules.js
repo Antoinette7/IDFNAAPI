@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const { ObjectId } = mongoose.Schema;
+
+const commentSchema = new mongoose.Schema({
+  UserComment: String,
+  CommentedBy: { type: ObjectId, ref: "userSchema" },
+  CommentDate: { type: Date, default: Date.now }
+});
 const blogSchema = new mongoose.Schema({
   blogImage: {
     type: String,
@@ -26,6 +33,8 @@ const blogSchema = new mongoose.Schema({
     type: String,
     require:false,
   },
+  
+  comments: [commentSchema] // Added comments array using the commentSchema
 });
 
 const BlogModel = mongoose.model("blog", blogSchema);
