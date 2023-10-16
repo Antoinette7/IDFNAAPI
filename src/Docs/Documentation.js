@@ -20,6 +20,7 @@
  *                 type: string
  *               content:
  *                 type: string
+ *              
  *     responses:
  *       200:
  *         description: Blog post created successfully
@@ -257,78 +258,6 @@
  *                   example: "Blog post not found"
  */
 
- 
- /**
- * @swagger
- * /api/api/klab/blog/{id}/comment:
- *   post:
- *     summary: Create a comment on a blog post
- *     tags:
- *       - Blog
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Blog ID to comment on
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               comment:
- *                 type: string
- *                 name: Comment
- *     responses:
- *       200:
- *         description: Comment added successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: "200"
- *                 message:
- *                   type: string
- *                   example: "Comment added successfully"
- *                 data:
- *                   type: object
- *                   properties:
- *                     comment:
- *                       type: string
- *                       example: "Great blog post!"
- *       401:
- *         description: Unauthorized. Please login to leave a comment.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: "401"
- *                 message:
- *                   type: string
- *                   example: "Unauthorized. Please login to leave a comment."
- *       404:
- *         description: Blog post not found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: "404"
- *                 message:
- *                   type: string
- *                   example: "Blog post not found"
- */
 
 
  //Users
@@ -359,17 +288,17 @@
  *                 type: string
  *               email:
  *                 type: string
- *               Password:
+ *               password:
  *                 type: string
- *               Profile:
+ *               profile:
  *                 type: string
  *                 format: binary  # This indicates that it's expecting a file
  *             required:
  *               - firstname
  *               - lastname
  *               - email
- *               - Password
- *               - Profile
+ *               - password
+ *               - profile
  *     responses:
  *       201:
  *         description: User Registration Success
@@ -449,7 +378,7 @@
  *               email:
  *                 type: string
  *                 name: email
- *               Password:
+ *               password:
  *                 type: string
  *                 name: Password
  *     responses:
@@ -474,11 +403,11 @@
  *                       example: John
  *                     lastname:
  *                       type: string
- *                       example: Doe
+ *                       example: Anto
  *                     email:
  *                       type: string
- *                       example: john.doe@example.com
- *                     Profile:
+ *                       example: igihozo.anto@example.com
+ *                     profile:
  *                       type: string
  *                       example: http://example.com/profile.jpg
  *       401:
@@ -524,12 +453,12 @@
  *                 type: string
  *               email:
  *                 type: string
- *               Password:
+ *               password:
  *                 type: string
  *               role:
  *                 type: string
  *                 required: true
- *               Profile:
+ *               profile:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -551,14 +480,14 @@
  *                   properties:
  *                     firstname:
  *                       type: string
- *                       example: John
+ *                       example: anto
  *                     lastname:
  *                       type: string
  *                       example: Anto
  *                     email:
  *                       type: string
  *                       example: Anto.igihozo@example.com
- *                     Profile:
+ *                     profile:
  *                       type: string
  *                       example: http://example.com/new_profile.jpg
  */

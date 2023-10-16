@@ -1,12 +1,12 @@
 import express from "express";
 import fileUpload from "../helper/multer";
-
 import {
     signup,
     login,
     getalluser,
     deletuser,
     updateData,
+    
 } from "../controllers/useCntrollers";
 const userRoutes = express.Router();
 userRoutes.delete("/delete/:id", deletuser);

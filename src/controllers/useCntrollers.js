@@ -133,7 +133,7 @@ return res.status(200).json({
 //update
 export const updateData = async(req,res)=>{
   try{
-        const { firstname, lastname,email,password,profile} = req.body;
+        const { firstname, lastname,email,password,profile,role,} = req.body;
  const{id} = req.params;
  const use = await users.findById(id)
  if(!use)
@@ -152,7 +152,7 @@ const updatee = await users.findByIdAndUpdate(id,{
   password: hashedPass,
   profile:result?.secure_url ||
   "https://res.cloudinary.com/dx5hdez0h/image/upload/v1696595102/cld-sample.jpg",
-
+ role,
 });
 return res.status(200).json({
   status:"200",
