@@ -18,7 +18,7 @@
  *                 format: binary  
  *               title:
  *                 type: string
- *               blogContent:
+ *               content:
  *                 type: string
  *     responses:
  *       200:
@@ -239,7 +239,7 @@
  *                     title:
  *                       type: string
  *                       example: "Title of the Blog"
- *                     blogContent:
+ *                     content:
  *                       type: string
  *                       example: "Content of the blog post"
  *       404:
