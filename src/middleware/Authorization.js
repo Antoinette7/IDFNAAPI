@@ -1,5 +1,5 @@
 import Jwt from "jsonwebtoken";
-import users from "../modules/userModule";
+import users from "../models/userModel";
 const Authorization = async (req, res, next) => {
   let token;
 
@@ -31,7 +31,7 @@ const Authorization = async (req, res, next) => {
     if (logedUser.role !== "admin") {
       res.status(404).json({
         status: "404",
-        message: "Only Loged User can do this operation",
+        message: "Only admin can do this operation",
       });
     } else {
       req.users = logedUser;

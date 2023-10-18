@@ -1,4 +1,4 @@
-import BlogModel from "../modules/blogModules";
+import BlogModel from "../models/blogModel";
 import { uploadToCloud } from "../helper/cloud";
 //https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg
 
@@ -87,7 +87,7 @@ blogImage: result?.secure_url ||
 "https://res.cloudinary.com/dx5hdez0h/image/upload/v1696595102/cld-sample.jpg",
 title,
 content,
-coment,
+
 
 });
 

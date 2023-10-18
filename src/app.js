@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
+import zxcvbn from "zxcvbn";
+
 
 
 //import for doc
@@ -11,9 +13,12 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
 // importing routes
-import statusRoutes from "./routes/StaatusRoutes";
+
 import blogRoutes from "./routes/blogRoutes"
 import userRoutes from "./routes/userRoute";
+
+
+
 // configuration
 
 const app = express();
@@ -61,9 +66,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // routes
 
-app.use("/api/klab/info", statusRoutes);
+// app.use("/api/klab/info", statusRoutes);
 app.use("/api/klab/blog", blogRoutes);
 app.use("/api/klab/user",userRoutes);
+
+
+
 
 //
 app.get("/", (req, res) => {
