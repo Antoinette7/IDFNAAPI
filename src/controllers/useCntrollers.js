@@ -3,17 +3,28 @@ import { uploadToCloud } from "../helper/cloud";
 import Jwt from "jsonwebtoken";
 import bcrypt, { genSalt, hash } from "bcrypt";
 // Create user
+// Define a function to validate the password
+function isPasswordValid(password) {
+  return password.length >= 8;
+}
 
 export const signup = async (req, res) => {
   try {
     const { firstname, lastname, email, password, profile } = req.body;
-    const userEmail = await users.findOne({
-      email: req.body.email,
-    });
+    const userEmail = await users.findOne({ email: req.body.email });
+
     if (userEmail) {
-      return res.status(500).json({
-        status: "500",
-        message: "Email Already Exist",
+      return res.status(400).json({
+        status: "400",
+        message: "Email Already Exists",
+      });
+    }
+
+    // Validate password
+    if (!isPasswordValid(password)) {
+      return res.status(400).json({
+        status: "400",
+        message: "Your password is not strong enough. It should have at least 8 characters.",
       });
     }
 
@@ -141,6 +152,16 @@ export const updateData = async(req,res)=>{
 status:"404",
 message:"users not found",
 });
+
+
+    // Validate password
+    if (!isPasswordValid(password)) {
+      return res.status(400).json({
+        status: "400",
+        message: "Your password is not strong enough. It should have at least 8 characters.",
+      });
+    }
+
 let result;
 if (req.file) result = await  uploadToCloud(req.file,res);
 const salt = await bcrypt.genSalt(10);
