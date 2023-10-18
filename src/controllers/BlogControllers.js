@@ -1,4 +1,4 @@
-import BlogModel from "../modules/blogModules";
+import BlogModel from "../models/blogModel";
 import { uploadToCloud } from "../helper/cloud";
 //https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg
 
