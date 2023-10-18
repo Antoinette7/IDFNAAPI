@@ -34,7 +34,7 @@ const options = {
       version : "1.0.0.",
     },
     servers: [{
-       url:"http://localhost:4400/"
+       url:"https://node-app-plsi.onrender.com"
     
     }
   ],
