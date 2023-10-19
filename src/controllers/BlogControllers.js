@@ -5,7 +5,7 @@ import { uploadToCloud } from "../helper/cloud";
 // create blog
 export const createBlog = async (req, res) => {
   try {
-    const { blogImage, title, content, coment,} = req.body;
+    const { blogImage, title, content,} = req.body;
     let result;
     if (req.file) result = await uploadToCloud(req.file, res);
     const blog = await BlogModel.create({
@@ -126,3 +126,28 @@ return res.status(200).json({
   }
 };
  
+
+
+// // Route for retrieving a blog with comments
+// export const getBlogWithComments = async (req, res) => {
+//   try {
+//     const blogId = req.params.blogId;
+//     const blog = await BlogModel.findById(blogId)
+//       .populate({
+//         path: 'comments',
+//         populate: {
+//           path: 'author',
+        
+//         },
+//       })
+//       .populate('author');
+       
+//     if (!blog) {
+//       return res.status(404).json({ status: "404", message: "Blog not found" });
+//     }
+
+//     return res.status(200).json({ status: "200", message: "Blog with Comments", data: blog });
+//   } catch (error) {
+//     return res.status(500).json({ status: "500", message: "Failed to retrieve blog", error: error.message });
+//   }
+// };
