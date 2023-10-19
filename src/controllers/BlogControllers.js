@@ -14,7 +14,6 @@ export const createBlog = async (req, res) => {
         "https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg",
       title,
       content,
-      comment,
       author:req.users.lastname,
       authorP:req.users.profile
     });
