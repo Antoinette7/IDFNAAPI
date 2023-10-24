@@ -19,7 +19,7 @@ export const createComment = async (req, res) => {
     
 
 
-    // Create the comment
+    // Create the comment on blog
     const comment = await CommentModel.create({
       blogId, 
       content,
