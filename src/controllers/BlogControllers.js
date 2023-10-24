@@ -1,11 +1,20 @@
 import BlogModel from "../models/blogModel";
+import Users from "../models/userModel";
 import { uploadToCloud } from "../helper/cloud";
 //https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg
 
 // create blog
 export const createBlog = async (req, res) => {
   try {
+    const user = req.Users
     const { blogImage, title, content,} = req.body;
+    const checkTitle = await BlogModel.findOne({title});
+    if(checkTitle){
+      return res.status(400).json({
+        status: "400",
+        message: "Title exists in database",
+      })
+    };
     let result;
     if (req.file) result = await uploadToCloud(req.file, res);
     const blog = await BlogModel.create({
@@ -14,11 +23,10 @@ export const createBlog = async (req, res) => {
         "https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg",
       title,
       content,
-      author:req.users.lastname,
-      authorP:req.users.profile
+      user: user._id,
     });
     return res.status(200).json({
-      message: "Your Blog uploaded Well",
+      message: "Your Blog created Well",
       data: blog,
     });
   } catch (error) {
@@ -29,9 +37,9 @@ export const createBlog = async (req, res) => {
   }
 };
 // read blog
-export const etImportedData = async (req, res) =>{
+export const getAllBlogs = async (req, res) =>{
   try {
-    const blogPosts = await BlogModel.find();
+    const blogPosts = await BlogModel.find().populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}});
     return res.status(200).json({
       message: "Blog posts imported successfully",
       data: blogPosts,
@@ -108,7 +116,7 @@ export const getId = async (req, res) =>{
     
   try{
     const {id}= req.params;
-const blogPost = await BlogModel.findById(id);
+const blogPost = await BlogModel.findById(id).populate({path: "Comment", populate:{path: "user", select: "firstname lastname email profile"}});
 return res.status(200).json({
   status:"200",
   message:"imported post is available",
@@ -124,29 +132,4 @@ return res.status(200).json({
 
   }
 };
- 
 
-
-// // Route for retrieving a blog with comments
-// export const getBlogWithComments = async (req, res) => {
-//   try {
-//     const blogId = req.params.blogId;
-//     const blog = await BlogModel.findById(blogId)
-//       .populate({
-//         path: 'comments',
-//         populate: {
-//           path: 'author',
-        
-//         },
-//       })
-//       .populate('author');
-       
-//     if (!blog) {
-//       return res.status(404).json({ status: "404", message: "Blog not found" });
-//     }
-
-//     return res.status(200).json({ status: "200", message: "Blog with Comments", data: blog });
-//   } catch (error) {
-//     return res.status(500).json({ status: "500", message: "Failed to retrieve blog", error: error.message });
-//   }
-// };

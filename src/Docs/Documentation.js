@@ -537,3 +537,59 @@
  *                   type: string
  *                   example: "User not found"
  */
+
+/**
+ * @swagger
+ * /api/klab/comment/create/{id}:
+ *   post:
+ *     summary: comment add
+ *     tags:
+ *       - Comment
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Blog ID to comment
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *                 example: " comment added on  blog post"
+ *     responses:
+ *       200:
+ *         description: comment added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "200"
+ *                 message:
+ *                   type: string
+ *                   example: "comment added successfully"
+ *       404:
+ *         description: Blog post not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "404"
+ *                 message:
+ *                   type: string
+ *                   example: "failed to add comment"
+ */
+
+
+ 

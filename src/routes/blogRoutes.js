@@ -1,7 +1,7 @@
 import express from "express";
 import { 
     createBlog,
-    etImportedData,
+    getAllBlogs,
     delteData,
     updateData,
     getId,
@@ -14,7 +14,7 @@ import Authorization from "../middleware/Authorization";
 const blogRoutes = express.Router();
 
 blogRoutes.post("/create",Authorization, fileUpload.single("blogImage"), createBlog);
-blogRoutes.get("/read", etImportedData);
+blogRoutes.get("/read", getAllBlogs);
 blogRoutes.delete("/delete/:id", delteData);
 blogRoutes.get("/read/:id" , getId);
 blogRoutes.put("/update/:id",fileUpload.single("blogImage"),updateData);

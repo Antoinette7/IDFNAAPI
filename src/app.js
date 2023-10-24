@@ -16,7 +16,7 @@ import swaggerUi from "swagger-ui-express";
 // import statusRoutes from "./routes/StatusRoutes"
 import blogRoutes from "./routes/blogRoutes"
 import userRoutes from "./routes/userRoute";
-import CommentRoutes from "./routes/comment Routes";
+import commentRoutes from "./routes/commentRoutes";
 
 
 
@@ -70,7 +70,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use("/api/klab/info", statusRoutes);
 app.use("/api/klab/blog", blogRoutes);
 app.use("/api/klab/user",userRoutes);
-app.use("/api/klab/Comment",CommentRoutes);
+app.use("/api/klab/comment",commentRoutes);
 
 
 //

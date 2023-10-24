@@ -1,4 +1,4 @@
-import users from "../models/userModule";
+import Users from "../models/userModel";
 import { uploadToCloud } from "../helper/cloud";
 import Jwt from "jsonwebtoken";
 import bcrypt, { genSalt, hash } from "bcrypt";
@@ -11,7 +11,7 @@ function isPasswordValid(password) {
 export const signup = async (req, res) => {
   try {
     const { firstname, lastname, email, password, profile } = req.body;
-    const userEmail = await users.findOne({ email: req.body.email });
+    const userEmail = await Users.findOne({ email: req.body.email });
 
     if (userEmail) {
       return res.status(400).json({
@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
 
-    const newUser = await users.create({
+    const newUser = await Users.create({
       firstname,
       lastname,
       email,
@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
 // login
 export const login = async (req, res) => {
   try {
-    const userLogin = await users.findOne({
+    const userLogin = await Users.findOne({
       email: req.body.email,
     });
     if (!userLogin) {
@@ -98,7 +98,7 @@ export const login = async (req, res) => {
 //getallusers
 export const getalluser = async(req,res)=>{
   try{
-const user = await users.find();
+const user = await Users.find();
 return res.status(200).json({
   status:"200",
   message:"users signedeup successfull",
@@ -118,13 +118,13 @@ message:"users not found",
 export const deletuser =async (req, res)=> {
   try{
 const {id} = req.params;
-const userd = await users.findById(id);
+const userd = await Users.findById(id);
 if (!userd)
 return res.status(404).json({
   status:"404",
   message:"uses not found",
 });
-const deleteuser = await users.findByIdAndDelete(id);
+const deleteuser = await Users.findByIdAndDelete(id);
 return res.status(200).json({
   status:"200",
   message:"user signned deleted successfull",
@@ -146,7 +146,7 @@ export const updateData = async(req,res)=>{
   try{
         const { firstname, lastname,email,password,profile,role,} = req.body;
  const{id} = req.params;
- const use = await users.findById(id)
+ const use = await Users.findById(id)
  if(!use)
  return res.status(404),json({
 status:"404",
@@ -166,7 +166,7 @@ let result;
 if (req.file) result = await  uploadToCloud(req.file,res);
 const salt = await bcrypt.genSalt(10);
 const hashedPass = await bcrypt.hash(password, salt);
-const updatee = await users.findByIdAndUpdate(id,{
+const updatee = await Users.findByIdAndUpdate(id,{
   firstname,
   lastname,
   email,

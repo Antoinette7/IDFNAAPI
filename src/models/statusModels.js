@@ -19,3 +19,5 @@ const statusSchema = new mongoose.Schema({
 });
 const statusInfo = mongoose.model("information", statusSchema);
 export default statusInfo;
+
+
