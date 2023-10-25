@@ -23,10 +23,11 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["user", "admin"],
-    default: "user",
+    default: "admin",
   },
+  posts:[{type: mongoose.Schema.ObjectId, ref: "blogs"}]
 });
 //git any change
 
-const users = mongoose.model("users", userSchema);
-export default users;
+const Users = mongoose.model("users", userSchema);
+export default Users;

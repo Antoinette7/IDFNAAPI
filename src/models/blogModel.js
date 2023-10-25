@@ -13,19 +13,20 @@ const blogSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
- 
-  author:{
-    type: String,
-    require:false
+  user: {type: mongoose.Schema.ObjectId, ref: "users"},
+  Comment:[{
+  type: mongoose.Schema.ObjectId,
+  ref: "comment",
 
-  },
-  authorP: {
-    type: String,
-    require:false,
+  }],
+  
+  views: {
+    type: Number,
+    default: 0, // Initial view count is 0
   },
 
 });
 
-const BlogModel = mongoose.model("blog", blogSchema);
+const BlogModel = mongoose.model("blogs", blogSchema);
 
 export default BlogModel;

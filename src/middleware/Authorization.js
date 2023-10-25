@@ -1,5 +1,5 @@
 import Jwt from "jsonwebtoken";
-import users from '../models/userModule'
+import Users from "../models/userModel";
 const Authorization = async (req, res, next) => {
   let token;
 
@@ -19,7 +19,7 @@ const Authorization = async (req, res, next) => {
     }
 
     const decoded = await Jwt.verify(token, process.env.JWT_SECRET);
-    const logedUser = await users.findById(decoded.id);
+    const logedUser = await Users.findById(decoded.id);
 
     if (!logedUser) {
       res.status(403).json({
@@ -34,7 +34,7 @@ const Authorization = async (req, res, next) => {
         message: "Only admin can do this operation",
       });
     } else {
-      req.users = logedUser;
+      req.Users = logedUser;
       next();
     }
 

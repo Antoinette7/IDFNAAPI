@@ -13,7 +13,8 @@ const fileUpload = multer({
       ext !== ".tif" &&
       ext !== ".webp" &&
       ext !== ".bmp" &&
-      ext !== ".tiff"
+      ext !== ".tiff" && 
+      ext !== ".jfif"
     ) {
       return cb(new Error("Invalid file type"), false);
     }

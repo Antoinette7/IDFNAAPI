@@ -9,7 +9,7 @@ mongoose
     console.log("Db Connection Sucesfully");
   })
   .catch((err) => console.log(err));
-const PORT = process.env.PORT || 4400;
+const PORT = process.env.PORT || 4500;
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on Port:  http://localhost:${PORT}`);
