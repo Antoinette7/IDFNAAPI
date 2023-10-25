@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import zxcvbn from "zxcvbn";
+import validator from "validator";
+
 
 
 

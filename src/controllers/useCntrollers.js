@@ -11,6 +11,19 @@ function isPasswordValid(password) {
 export const signup = async (req, res) => {
   try {
     const { firstname, lastname, email, password, profile } = req.body;
+    //Validation functions
+    const validateEmail = (email) => {
+      // Basic email format validation
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailRegex.test(email);
+    };
+
+    if (!email || !validateEmail(email)) {
+      return res.status(400).json({
+        status: "400",
+        message: "Invalid email",
+      });
+    }
     const userEmail = await Users.findOne({ email: req.body.email });
 
     if (userEmail) {
@@ -28,11 +41,11 @@ export const signup = async (req, res) => {
       });
     }
 
+
     let result;
     if (req.file) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
-
     const newUser = await Users.create({
       firstname,
       lastname,

@@ -19,6 +19,11 @@ const blogSchema = new mongoose.Schema({
   ref: "comment",
 
   }],
+  
+  views: {
+    type: Number,
+    default: 0, // Initial view count is 0
+  },
 
 });
 

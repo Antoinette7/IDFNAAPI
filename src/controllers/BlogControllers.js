@@ -1,7 +1,7 @@
 import BlogModel from "../models/blogModel";
 import Users from "../models/userModel";
 import { uploadToCloud } from "../helper/cloud";
-//https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg
+//https://res.cloudinary.com/dx5hdez0h/image/upload/v1697568266/pjqdfdjfg1qtjhwk0btr.jpg
 
 // create blog
 export const createBlog = async (req, res) => {
@@ -20,7 +20,7 @@ export const createBlog = async (req, res) => {
     const blog = await BlogModel.create({
       blogImage:
         result?.secure_url ||
-        "https://res.cloudinary.com/dskrteajn/image/upload/v1675271488/hznovwf7ksuylz9qcd6d.jpg",
+        "https://res.cloudinary.com/dx5hdez0h/image/upload/v1697568266/pjqdfdjfg1qtjhwk0btr.jpg",
       title,
       content,
       user: user._id,
@@ -92,7 +92,7 @@ export const updateData = async(req, res) =>{
 
 
 blogImage: result?.secure_url ||
-"https://res.cloudinary.com/dx5hdez0h/image/upload/v1696595102/cld-sample.jpg",
+"https://res.cloudinary.com/dx5hdez0h/image/upload/v1697568266/pjqdfdjfg1qtjhwk0btr.jpg",
 title,
 content,
 
@@ -116,17 +116,23 @@ export const getId = async (req, res) =>{
     
   try{
     const {id}= req.params;
-const blogPost = await BlogModel.findById(id).populate({path: "Comment", populate:{path: "user", select: "firstname lastname email profile"}});
+const blogPost = await BlogModel.findById(id).populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}});
+  // Increment the view count
+  blogPost.views += 1;
+  await blogPost.save();
+
+
 return res.status(200).json({
   status:"200",
   message:"imported post is available",
   data:blogPost,
 });
   }
-  catch(error){
+  
+catch(error){
     return res.status(500).json({
       status:"500",
-      message:"this not found",
+      message:"this blognot found",
       error:error.message,
     });
 
