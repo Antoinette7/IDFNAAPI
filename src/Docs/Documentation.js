@@ -538,6 +538,9 @@
  *                   example: "User not found"
  */
 
+
+  // api of comment
+
 /**
  * @swagger
  * /api/klab/comment/create/{id}:
@@ -592,4 +595,91 @@
  */
 
 
- 
+//get all comment added
+
+/**
+ * @swagger
+ * /api/klab/comment/read:
+ *   get:
+ *     summary: Get all comment
+ *     tags:
+ *       - Comment
+ *     requestBody:
+ *       required: false
+ *     responses:
+ *       200:
+ *         description: List of all comment
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   content:
+ *                     type: string
+ *                     example: "Content of comment"
+ *       404:
+ *         description: No comment found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "404"
+ *                 message:
+ *                   type: string
+ *                   example: "No comment found"
+ */
+
+
+/**
+ * @swagger
+ * /api/klab/comment/delete/{id}:
+ *   delete:
+ *     summary: Delete comment by ID
+ *     tags:
+ *       - Comment
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Blog ID to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: comment deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "200"
+ *                 message:
+ *                   type: string
+ *                   example: "comment deleted successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     content:
+ *                       type: string
+ *                       example: "comment on the post"
+ *       404:
+ *         description: comment not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "404"
+ *                 message:
+ *                   type: string
+ *                   example: "comment not found"
+ */
