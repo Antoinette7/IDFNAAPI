@@ -39,7 +39,11 @@ export const createBlog = async (req, res) => {
 // read blog
 export const getAllBlogs = async (req, res) =>{
   try {
-    const blogPosts = await BlogModel.find().populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}});
+    const blogPosts = await BlogModel.find().populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}})
+
+    .populate({path: "user",select:"firstname lastname email profile"});
+
+
     return res.status(200).json({
       message: "Blog posts imported successfully",
       data: blogPosts,
