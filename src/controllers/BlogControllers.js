@@ -99,9 +99,8 @@ blogImage: result?.secure_url ||
 "https://res.cloudinary.com/dx5hdez0h/image/upload/v1697568266/pjqdfdjfg1qtjhwk0btr.jpg",
 title,
 content,
-
-
 });
+console.log("Blog updated on:", updatee.updateDate);
 
     return res.status(200).json({
       message: "Blog post updated successfully",
@@ -120,8 +119,11 @@ export const getId = async (req, res) =>{
     
   try{
     const {id}= req.params;
-const blogPost = await BlogModel.findById(id).populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}});
-  // Increment the view count
+const blogPost = await BlogModel.findById(id).populate({path: "Comment", populate:{path: "blogCommentor", select: "firstname lastname email profile"}})
+
+.populate({path: "user",select:"firstname lastname email profile"});
+
+// Increment the view count
   blogPost.views += 1;
   await blogPost.save();
 
