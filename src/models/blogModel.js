@@ -28,6 +28,9 @@ const blogSchema = new mongoose.Schema({
     type: Date, 
     default: Date.now
   },
+  updateDate: { 
+    type: Date,
+     default: Date.now },
 
 });
 
