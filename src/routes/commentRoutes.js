@@ -1,16 +1,16 @@
 import express from "express";
+import userAutho from "../middleware/userauthorization";
 import {
     createComment,
     getComments,
     commentdelete,
 } from "../controllers/commentController";
 
-import Authorization from "../middleware/Authorization";
 import fileUpload from "../helper/multer";
 
 const commentRoutes = express.Router();
 
-commentRoutes.post("/create/:blogId", Authorization, fileUpload.single("blogImage"), createComment);
+commentRoutes.post("/create/:blogId",userAutho, fileUpload.single("blogImage"), createComment);
 
 commentRoutes.get('/read', getComments );
 

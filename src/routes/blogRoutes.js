@@ -10,6 +10,9 @@ import {
 } from "../controllers/BlogControllers";
 import fileUpload from "../helper/multer";
 import Authorization from "../middleware/Authorization";
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 const blogRoutes = express.Router();
 
